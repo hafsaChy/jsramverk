@@ -1,0 +1,52 @@
+# See https://help.github.com/articles/ignoring-files/ for more about ignoring files.
+
+# dependencies
+/node_modules
+/.pnp
+.pnp.js
+
+# testing
+/coverage
+
+# production
+/build
+
+# misc
+.DS_Store
+.env.local
+.env.development.local
+.env.test.local
+.env.production.local
+
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+#hosting
+.firebase/
+.firebaserc
+firebase.json
+
+.vscode/
+*.sqlite
+my-app/
+
+#hafsa
+.github/
+backend/routes/app1.js
+frontend/frontend/
+me-react/src/Me.js
+me-react/src/Report.js
+my-app1/
+
+
+.expo/
+dist/
+npm-debug.*
+*.jks
+*.p8
+*.p12
+*.key
+*.mobileprovision
+*.orig.*
+web-build/
