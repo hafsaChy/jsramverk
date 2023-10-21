@@ -8,7 +8,7 @@ process.env.NODE_ENV = 'test';
 
 import { should, use, request } from 'chai';
 import chaiHttp from 'chai-http';
-import httpServer from '../../app.js';
+import httpServer from '../../app';
 
 should();
 

@@ -1,7 +1,7 @@
 // const database = require('../db/database.mjs');
 // const { ObjectId } = require('mongodb');
 import { ObjectId } from 'mongodb';
-import database from '../db/database.js';
+import database from '../db/database';
 
 const tickets = {
     collectionName: "tickets",

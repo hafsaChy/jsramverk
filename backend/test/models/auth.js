@@ -7,8 +7,8 @@
 process.env.NODE_ENV = 'test';
 
 import { should } from 'chai';
-import { openDb } from '../../db/database.js';
-import { getUsers, register, login } from '../../models/auth.js';
+import { openDb } from '../../db/database';
+import { getUsers, register, login } from '../../models/auth';
 
 should();
 

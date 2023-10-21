@@ -7,8 +7,8 @@
 process.env.NODE_ENV = 'test';
 
 import { should } from 'chai';
-import { openDb, getCollection } from '../../db/database.js';
-import resetCollection from '../../db/setup.js';
+import { openDb, getCollection } from '../../db/database';
+import resetCollection from '../../db/setup';
 
 should();
 

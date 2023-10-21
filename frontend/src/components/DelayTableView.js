@@ -1,13 +1,13 @@
 import React, { useState, useEffect } from 'react';
-import Clock from './Clock.js'
-import TicketView from './TicketView.js';
+import Clock from './Clock'
+import TicketView from './TicketView';
 
 export default function DelayTableView({ onTrainClick }) {
   const [delayedData, setDelayedData] = useState([]);
 
   useEffect(() => {
     fetchDelayedData();
-  }, [delayedData]);
+  }, []);
 
   const fetchDelayedData = () => {
     fetch('http://localhost:1337/delayed')

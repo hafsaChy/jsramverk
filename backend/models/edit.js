@@ -1,9 +1,9 @@
 // Function that handles the separation of tickets being updated
 // const tickets = require('./tickets');
-import tickets from './tickets.js';
+import tickets from './tickets';
 // Auth model
 // const authModel = require('./auth');
-import authModel from './auth.js';
+import authModel from './auth';
 
 function editTicket(io) {
     // Get all tickets

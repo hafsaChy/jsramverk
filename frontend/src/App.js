@@ -1,20 +1,23 @@
 import React from 'react';
 import "./App.css";
-import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
-import DelayedTrainPage from "./pages/DelayedTrainPage";
-
+import { BrowserRouter as Router } from "react-router-dom";
+import DelayTableView from './components/DelayTableView';
+import MapView from './components/MapView';
 
 function App() {
   
   return (
-    <div className="App">
-      <Router>
-        <Routes>
-          <Route path="/" element={<DelayedTrainPage />}>
-          </Route>
-        </Routes>
-      </Router>
-    </div>
+    <Router>
+      <div className="App">
+        <header className="App-header">
+          TågInfo Kontroll App
+        </header>
+        <div className="container">
+          <DelayTableView />
+          <MapView />
+        </div>
+      </div>    
+    </Router>
   );
 }
 

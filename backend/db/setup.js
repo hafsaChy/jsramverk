@@ -3,7 +3,7 @@
  */
 "use strict";
 
-import database from '../db/database.js';
+import database from '../db/database';
 
 // Do it.
 resetCollection("tickets");
