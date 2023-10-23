@@ -1,6 +1,8 @@
 import io from 'socket.io-client'
 import React, { useEffect, useRef } from 'react';
 import * as L from 'leaflet';
+import icon from "leaflet/dist/images/marker-icon.png";
+import iconShadow from "leaflet/dist/images/marker-shadow.png";
 // import markerImg from '../icon/location.png'
 
 const MapView = () => {
@@ -23,7 +25,12 @@ const MapView = () => {
         const marker = markers.current[data.trainnumber];
         marker.setLatLng(data.position);
       } else {
-        const marker = L.marker(data.position).bindPopup(data.trainnumber).addTo(map);
+        let customIcon = L.icon({
+          iconUrl: icon,
+          iconSize: [32, 32],
+          shadowUrl: iconShadow,
+        })
+        const marker = L.marker(data.position, { icon: customIcon }).bindPopup(data.trainnumber).addTo(map);
         markers.current[data.trainnumber] = marker;
       }
     });

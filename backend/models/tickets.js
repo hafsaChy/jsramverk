@@ -10,7 +10,7 @@ if (process.env.NODE_ENV === 'test') {
 const tickets = {
     getTickets: async function getTickets(req, res) {
         // Access a MongoClient object
-        const client = await database.accessDb();
+        const client = await database.openDb();
 
         // Connect to the database
         await client.connect();
@@ -36,7 +36,7 @@ const tickets = {
 
     createTicket: async function createTicket(req, res) {
         // Access a MongoClient object
-        const client = await database.accessDb();
+        const client = await database.openDb();
 
         // Connect to the database
         await client.connect();
