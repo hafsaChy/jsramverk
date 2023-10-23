@@ -3,15 +3,15 @@ import express from 'express';
 import cors from 'cors';
 import morgan from 'morgan';
 import bodyParser from 'body-parser';
-import authModel from './models/auth';  // For authentication
-import trainsModel from './models/trains';
-import editTicket from './models/edit';
-import delayed from './routes/delayed';
-import tickets from './routes/tickets';
-import codes from './routes/codes';
-import auth from './routes/auth';
-import edit from './routes/edit';
-import trains from './routes/trains';
+import authModel from './models/auth.js';  // For authentication
+import trainsModel from './models/trains.js';
+import editTicket from './models/edit.js';
+import delayed from './routes/delayed.js';
+import tickets from './routes/tickets.js';
+import codes from './routes/codes.js';
+import auth from './routes/auth.js';
+import edit from './routes/edit.js';
+import trains from './routes/trains.js';
 import { createServer } from 'http';
 import { Server } from 'socket.io';
 

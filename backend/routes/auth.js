@@ -3,7 +3,7 @@ import express from 'express';
 
 const router = express.Router();
 
-import auth from '../models/auth';
+import auth from '../models/auth.js';
 
 router.get('/', (req, res) => auth.getUsers(req, res));
 router.get('/', (req, res) => auth.register(req, res));

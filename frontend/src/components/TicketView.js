@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 
-export default function TicketView({ selectedTrain, onBackClick }) {
+const TicketView = ({ selectedTrain, onBackClick }) => {
   const [reasonCodes, setReasonCodes] = useState([]);
   const [newTicketId, setNewTicketId] = useState(0);
   const [existingTickets, setExistingTickets] = useState([]);
@@ -103,6 +103,6 @@ export default function TicketView({ selectedTrain, onBackClick }) {
       </div>
     </div>
   );
-};
+}
 
-// export default TicketView;
+export default TicketView;

@@ -3,7 +3,7 @@ import DelayTableView from './DelayTableView.js';
 import TicketView from './TicketView.js';
 import MapView from './MapView.js';
 
-export default function MainView() {
+const MainView = () => {
   const [selectedTrain, setSelectedTrain] = useState(null);
 
   const handleTrainClick = (train) => {
@@ -20,6 +20,6 @@ export default function MainView() {
       <MapView />
     </>
   );
-};
+}
 
-// export default MainView;
+export default MainView;

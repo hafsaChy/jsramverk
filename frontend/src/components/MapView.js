@@ -3,7 +3,7 @@ import React, { useEffect, useRef } from 'react';
 import * as L from 'leaflet';
 // import markerImg from '../icon/location.png'
 
-export default function MapView() {
+const MapView = () => {
   const mapRef = useRef(null);
   const markers = useRef({});
 
@@ -33,7 +33,7 @@ export default function MapView() {
     };
   }, []);
 
-  return <div id="map" className="map"></div>;
-};
+  return (<div id="map" className="map"></div>);
+}
 
-// export default Map;
+export default MapView;

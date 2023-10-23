@@ -2,7 +2,7 @@
 import express from 'express';
 const router = express.Router();
 
-import trains from "../models/trains";
+import trains from "../models/trains.js";
 
 router.get('/', (req, res) => trains.getTrains(req, res));
 router.post('/', (req, res) => trains.fetchAllDelayedTrains(req, res));

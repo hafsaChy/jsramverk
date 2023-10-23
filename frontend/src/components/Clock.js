@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 
-export default function Clock() {
+const Clock = () => {
   const [currentTime, setCurrentTime] = useState(new Date());
   useEffect(() => {
     let interval;
@@ -19,3 +19,5 @@ export default function Clock() {
     </>
   );
 }
+
+export default Clock;

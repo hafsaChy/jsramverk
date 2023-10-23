@@ -1,5 +1,5 @@
 // const database = require('../db/database.mjs');
-import database from '../db/database';
+import database from '../db/database.js';
 // const bcrypt = require('bcryptjs');
 import bcrypt from 'bcryptjs';
 // const jwt = require('jsonwebtoken');

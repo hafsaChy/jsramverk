@@ -2,7 +2,7 @@
 import fetch from 'node-fetch';
 
 const delayed = {
-    getDelayedTrains: async function getDelayedTrains() {
+    getDelayedTrains: async function getDelayedTrains(req, res) {
         const query = `<REQUEST>
             <LOGIN authenticationkey="${process.env.TRAFIKVERKET_API_KEY}" />
             <QUERY
@@ -34,16 +34,19 @@ const delayed = {
                 <INCLUDE>TrainOwner</INCLUDE>
             </QUERY>
         </REQUEST>`;
-        const response = await fetch(
+        fetch(
             "https://api.trafikinfo.trafikverket.se/v2/data.json", {
                 method: "POST",
                 body: query,
                 headers: { "Content-Type": "text/xml" }
             }
-        );
-        const result = await response.json();
-
-        return result.RESPONSE.RESULT[0].TrainAnnouncement;
+        ).then(function(response) {
+            return response.json();
+        }).then(function(result) {
+            return res.json({
+                data: result.RESPONSE.RESULT[0].TrainAnnouncement
+            });
+        });
     }
 };
 

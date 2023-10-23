@@ -3,7 +3,7 @@ import express from 'express';
 
 const router = express.Router();
 
-import delayed from "../models/delayed";
+import delayed from "../models/delayed.js";
 
 router.get('/', (req, res) => delayed.getDelayedTrains(req, res));
 

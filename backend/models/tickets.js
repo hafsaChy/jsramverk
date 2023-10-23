@@ -1,88 +1,65 @@
-// const database = require('../db/database.mjs');
-// const { ObjectId } = require('mongodb');
-import { ObjectId } from 'mongodb';
-import database from '../db/database';
+// const database = require('../db/database.js');
+import database from '../db/database.js';
+const collectionName = "tickets";
+let dbName = "trains";
+
+if (process.env.NODE_ENV === 'test') {
+    dbName = "trains-test";
+}
 
 const tickets = {
-    collectionName: "tickets",
+    getTickets: async function getTickets(req, res) {
+        // Access a MongoClient object
+        const client = await database.accessDb();
 
-    getTickets: function getTickets() {
-        const allTickets = database.getCollection(tickets.collectionName);
+        // Connect to the database
+        await client.connect();
 
-        return allTickets;
-    },
+        // Get the database object
+        const db = client.db(dbName);
 
-    createTicket: async function createTicket(args) {
-        const db = await database.openDb();
-        const collection = await db.collection(tickets.collectionName);
-        // Create a new ObjectId for the new document
-        const newId = new ObjectId();
+        // Get the collection object
+        const collection = db.collection(collectionName);
 
-        // TODO Discuss which limitations should apply on creating more than one ticket for a train
-        const result = await collection.insertOne({
-            _id: newId,
-            code: args.code,
-            trainnumber: args.trainnumber,
-            traindate: args.traindate
+        // Get all documents (tickets) in the collection (trains)
+        let allTickets = await collection.find().toArray();
+
+        // Close the database connection
+        await client.close();
+
+        // Print all documents to the console
+        console.log(allTickets);
+        return res.json({
+            data: allTickets
         });
-
-        await db.client.close();
-
-        if ( result.modifiedCount > 0 ) {
-            return {
-                _id: args._id,
-                code: args.code
-            };
-        }
-        
-        // Here we return the string of the ObjectId but alternatives are available
-        // https://www.mongodb.com/docs/manual/reference/method/ObjectId/#ObjectId
-        return {
-            _id: newId.toString(),
-            code: args.code,
-            trainnumber: args.trainnumber,
-            traindate: args.traindate,
-        };
     },
 
-    updateTicket: async function updateTicket(args) {
-        const db = await database.openDb();
-        const collection = await db.collection(tickets.collectionName);
-        // Create ObjectId based on given _id string
-        const ticketId = new ObjectId(args._id);
+    createTicket: async function createTicket(req, res) {
+        // Access a MongoClient object
+        const client = await database.accessDb();
 
-        const result = await collection.updateOne(
-            { _id: ticketId },
-            { $set: { code: args.code } }
-        );
+        // Connect to the database
+        await client.connect();
 
-        await db.client.close();
+        // Get the database object
+        const db = client.db(dbName);
 
-        if ( result.modifiedCount > 0 ) {
-            return {
-                _id: args._id,
-                code: args.code
-            };
-        }
-    },
+        // Get the collection object
+        const collection = db.collection(collectionName);
 
-    deleteTicket: async function deleteTicket(args) {
-        const db = await database.openDb();
-        const collection = await db.collection(tickets.collectionName);
-        // Create ObjectId based on given _id string
-        const ticketId = new ObjectId(args._id);
+        // Create new document (ticket) in the collection (trains)
+        let newTicket = req.body;
 
-        const result = await collection.deleteOne(
-            { _id: ticketId }
-        );
+        await collection.insertOne(newTicket);
 
-        await db.client.close();
+        // Close the database connection
+        await client.close();
 
-        if ( result.deletedCount > 0 ) {
-            return {
-                _id: args._id
-            }
-        }
+        // Print all documents to the console
+        console.log(newTicket);
+        return res.json({
+            data: newTicket
+        });
     }
 };
 

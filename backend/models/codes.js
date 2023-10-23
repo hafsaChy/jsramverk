@@ -4,7 +4,7 @@ import fetch from 'node-fetch';
 
 
 const codes = {
-    getCodes: async function getCodes() {
+    getCodes: async function getCodes(req, res) {
         const query = `<REQUEST>
             <LOGIN authenticationkey="${process.env.TRAFIKVERKET_API_KEY}" />
             <QUERY objecttype="ReasonCode" schemaversion="1">
@@ -15,16 +15,19 @@ const codes = {
             </QUERY>
         </REQUEST>`;
 
-        const response = await fetch(
+        fetch(
             "https://api.trafikinfo.trafikverket.se/v2/data.json", {
                 method: "POST",
                 body: query,
                 headers: { "Content-Type": "text/xml" }
             }
-        );
-        const result = await response.json();
-
-        return result.RESPONSE.RESULT[0].ReasonCode;
+        ).then(function(response) {
+            return response.json();
+        }).then(function(result) {
+            return res.json({
+                data: result.RESPONSE.RESULT[0].ReasonCode
+            });
+        });
     }
 };
 // module.exports = codes;
