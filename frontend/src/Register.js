@@ -1,9 +1,8 @@
 import React, { Component } from "react";
-import swal from "sweetalert";
+// import swal from "sweetalert";
 import axios from "axios";
 import { Button, TextField, Link } from "@material-ui/core";
 import { withRouter } from "./utils";
-// const axios = require("axios");
 
 class Register extends Component {
   constructor(props) {
@@ -22,21 +21,21 @@ class Register extends Component {
     axios.post('http://localhost:2000/register', {
       username: this.state.username,
       password: this.state.password,
-    }).then((res) => {
-      swal({
-        text: res.data.title,
-        icon: "success",
-        type: "success"
-      });
+    }).then((response) => response.json()) 
+    .then((data) => (data.title))
+      // swal({
+      //   text: data.title,
+      //   icon: "success"
+      // });
       // this.props.history.push('/');
-      this.props.navigate("/");
-    }).catch((err) => {
-      swal({
-        text: err.response.data.errorMessage,
-        icon: "error",
-        type: "error"
-      });
-    });
+      
+    .catch((error) => console.error('Error fetching regiter data:', error));
+    this.props.navigate("/")
+      // swal({
+      //   text: err.response,
+      //   icon: "error"
+      // });
+    // });
   }
 
   render() {

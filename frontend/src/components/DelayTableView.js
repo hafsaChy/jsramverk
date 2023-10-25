@@ -13,7 +13,7 @@ const DelayTableView = ({ onTrainClick }) => {
   }, []);
 
   const fetchDelayedData = () => {
-    fetch('http://localhost:1337/delayed')
+    fetch('http://localhost:2000/delayed')
       .then((response) => response.json())
       .then((data) => setDelayedData(data.data))
       .catch((error) => console.error('Error fetching delayed data:', error));

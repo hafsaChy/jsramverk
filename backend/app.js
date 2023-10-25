@@ -1,50 +1,35 @@
 import dotenv from 'dotenv';
+dotenv.config();
 import express from 'express';
 import cors from 'cors';
 import morgan from 'morgan';
-import multer from 'multer';
+// import multer from 'multer';
 import path from 'path';
 import bodyParser from 'body-parser';
+// import { graphqlHTTP } from 'express-graphql';
+// import schema from './graphql/index.js';
 import authModel from './models/auth.js';  // For authentication
 import trainsModel from './models/trains.js';
-import editTicket from './models/edit.js';
+import editTicket from './models/edits.js';
 import delayed from './routes/delayed.js';
 import tickets from './routes/tickets.js';
 import codes from './routes/codes.js';
 import auth from './routes/auth.js';
-import edit from './routes/edit.js';
+// import edits from './routes/edits.js';
 import trains from './routes/trains.js';
 import { createServer } from 'http';
 import { Server } from 'socket.io';
+// import database from '../db/database.js';
+// const bcrypt = require('bcryptjs');
+import bcrypt from 'bcryptjs';
+// const jwt = require('jsonwebtoken');
+import jwt from 'jsonwebtoken';
 
-
-dotenv.config();
+// const jwtSecret = process.env.JWT_SECRET;
+// const saltRounds = 10;
 
 const app = express();
 const httpServer = createServer(app); // Create the HTTP server instance
-
-var dir = './uploads';
-var upload = multer({
-  storage: multer.diskStorage({
-
-    destination: function (req, file, callback) {
-      if (!fs.existsSync(dir)) {
-        fs.mkdirSync(dir);
-      }
-      callback(null, './uploads');
-    },
-    filename: function (req, file, callback) { callback(null, file.fieldname + '-' + Date.now() + path.extname(file.originalname)); }
-
-  }),
-
-  fileFilter: function (req, file, callback) {
-    var ext = path.extname(file.originalname)
-    if (ext !== '.png' && ext !== '.jpg' && ext !== '.jpeg') {
-      return callback(/*res.end('Only images are allowed')*/ null, false)
-    }
-    callback(null, true)
-  }
-});
 
 app.use(cors());
 app.options('*', cors());
@@ -55,7 +40,6 @@ if (process.env.NODE_ENV !== 'test') {
 }
 
 app.disable('x-powered-by');
-app.use(express.static('uploads'));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 
@@ -66,8 +50,8 @@ const io = new Server (httpServer, {
   },
 });
 
-// const port = process.env.PORT || 1337;
-const port = 1337;
+const port = process.env.PORT || 1337;
+// const port = 1337;
 
 app.get('/', (req, res) => {
   res.json({
@@ -214,14 +198,23 @@ function checkUserAndGenerateToken(data, req, res) {
   });
 }
 
-app.use('/auth', authModel.checkToken); // authentication middleware
+// app.use('/auth', authModel.checkToken); // authentication middleware
+// GraphQL
+// const visual = false;
+
+// app.use('/graphql', authModel.checkToken); // authentication middleware
+// app.all('/graphql', graphqlHTTP((req) => ({ // Route
+//     schema: schema,
+//     graphiql: visual,
+//     context: { req } // Needed in mutation for checking if authenticated
+// })));
 
 app.use('/delayed', delayed);
 app.use('/tickets', tickets);
 app.use('/codes', codes);
 app.use('/trains', trains);
-// app.use('/auth', auth);
-app.use('/edit', edit);
+app.use('/auth', auth);
+// app.use('/edits', edits);
 
 // Start server
 httpServer.listen(port, () => {

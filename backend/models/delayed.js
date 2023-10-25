@@ -2,7 +2,7 @@
 import fetch from 'node-fetch';
 
 const delayed = {
-    getDelayedTrains: async function getDelayedTrains(req, res) {
+    getDelayedTrains: function getDelayedTrains(req, res) {
         const query = `<REQUEST>
             <LOGIN authenticationkey="${process.env.TRAFIKVERKET_API_KEY}" />
             <QUERY

@@ -1,9 +1,9 @@
 import React, { Component } from "react";
-import swal from "sweetalert";
+// import swal from "sweetalert";
 import axios from "axios";
 import { Button, TextField, Link } from "@material-ui/core";
 import { withRouter } from "./utils";
-const bcrypt = require("bcryptjs");
+import bcrypt from "bcryptjs";
 var salt = bcrypt.genSaltSync(10);
 
 class Login extends Component {
@@ -19,24 +19,23 @@ class Login extends Component {
 
   login = () => {
     const pwd = bcrypt.hashSync(this.state.password, salt);
-
+    
     axios.post('http://localhost:2000/login', {
       username: this.state.username,
       password: pwd,
-    }).then((res) => {
-      localStorage.setItem('token', res.data.token);
-      localStorage.setItem('user_id', res.data.id);
+    }).then((response) => response.json())
+      .then((data) => {
+      localStorage.setItem('token', data.token);
+      localStorage.setItem('user_id', data.id);
       // this.props.history.push('/dashboard');
-      this.props.navigate("/app");
-    }).catch((err) => {
-      if (err.response && err.response.data && err.response.data.errorMessage) {
-        swal({
-          text: err.response.data.errorMessage,
-          icon: "error",
-          type: "error"
-        });
-      }
-    });
+      
+    }).catch((error) => console.error('Error fetching delayed data:', error));
+    //   swal({
+    //       text: err.response,
+    //       icon: "error"
+    //     });
+    // });
+    this.props.navigate("/app");
   }
 
   render() {

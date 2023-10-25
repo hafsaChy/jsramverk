@@ -3,7 +3,6 @@ import dotenv from 'dotenv';
 dotenv.config();
 import { MongoClient } from 'mongodb';
 
-
 const dbUser = process.env.ATLAS_USERNAME;
 const dbPass = process.env.ATLAS_PASSWORD;
 
@@ -25,14 +24,17 @@ const database = {
             // Use test database when doing test
             if (process.env.NODE_ENV === 'test') {
                 dbName = 'test';
+            } else if (process.env.NODE_ENV === 'development') {
+                dbName = 'development';
             }
-            const dsn = `mongodb+srv://${dbUser}:${dbPass}@cluster0.5grf0fy.mongodb.net/${dbName}?retryWrites=true&w=majority`;
+            const dsn = `mongodb+srv://${dbUser}:${dbPass}@cluster0.5grf0fy.mongodb.net/` +
+                `${dbName}?retryWrites=true&w=majority`;
 
             // const dsn = `mongodb+srv://${dbUser}:${dbPass}@cluster0.5grf0fy.mongodb.net/?retryWrites=true&w=majority`;
-            //const client = new MongoClient(dsn, { useNewUrlParser: true });
             const client = new MongoClient(dsn);
+            // const client = await mongo.connect(dsn);
             // const client  = await mongo.connect(dsn);
-            const db = client.db();
+            const db = await client.connect();
 
             return db;
         } catch (err) {
