@@ -26,8 +26,7 @@ const database = {
             if (process.env.NODE_ENV === 'test') {
                 dbName = 'test';
             }
-            const dsn = `mongodb+srv://${dbUser}:${dbPass}@cluster0.5grf0fy.mongodb.net/` +
-               `${dbName}?retryWrites=true&w=majority`;
+            const dsn = `mongodb+srv://${dbUser}:${dbPass}@cluster0.5grf0fy.mongodb.net/${dbName}?retryWrites=true&w=majority`;
 
             // const dsn = `mongodb+srv://${dbUser}:${dbPass}@cluster0.5grf0fy.mongodb.net/?retryWrites=true&w=majority`;
             //const client = new MongoClient(dsn, { useNewUrlParser: true });

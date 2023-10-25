@@ -4,7 +4,7 @@ const collectionName = "tickets";
 let dbName = "trains";
 
 if (process.env.NODE_ENV === 'test') {
-    dbName = "trains-test";
+    dbName = "test";
 }
 
 const tickets = {
