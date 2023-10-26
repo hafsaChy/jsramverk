@@ -1,11 +1,8 @@
-// const express = require('express');
+import delayedModel from "../models/delayed.js";
 import express from 'express';
 
 const router = express.Router();
 
-import delayed from "../models/delayed.js";
+router.get('/', (req, res) => delayedModel.getDelayedTrains(req, res));
 
-router.get('/', (req, res) => delayed.getDelayedTrains(req, res));
-
-// module.exports = router;
 export default router;

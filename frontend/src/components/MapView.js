@@ -3,44 +3,61 @@ import React, { useEffect, useRef } from 'react';
 import * as L from 'leaflet';
 import icon from "leaflet/dist/images/marker-icon.png";
 import iconShadow from "leaflet/dist/images/marker-shadow.png";
-// import markerImg from '../icon/location.png'
 
 const MapView = () => {
-  const mapRef = useRef(null);
+  // const mapRef = useRef(null);
+  // const markers = useRef({});
+  const mapContainer = useRef(null);
+  // const [map, setMap] = useState({});
   const markers = useRef({});
 
   useEffect(() => {
-    const map = L.map('map').setView([62.173276, 14.942265], 5);
-    mapRef.current = map;
+    const container = L.DomUtil.get(mapContainer.current); 
+    if(container != null){ container._leaflet_id = null; }
 
-    L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
-      maxZoom: 19,
-      attribution: '&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
-    }).addTo(map);
+    if(container) {
+      const map = L.map( mapContainer.current, {
+        zoom: 5,
+        center: [14.942265, 62.173276]
+      });
+    
+      // const map = L.map('map').setView([62.173276, 14.942265], 5);
+      // mapContainer.current = map;
 
-    const socket = io("http://localhost:1337");
+      L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+        maxZoom: 19,
+        attribution: '&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
+      }).addTo(map);
 
-    socket.on("message", (data) => {
-      if (markers.current.hasOwnProperty(data.trainnumber)) {
-        const marker = markers.current[data.trainnumber];
-        marker.setLatLng(data.position);
-      } else {
-        let customIcon = L.icon({
-          iconUrl: icon,
-          iconSize: [32, 32],
-          shadowUrl: iconShadow,
-        })
-        const marker = L.marker(data.position, { icon: customIcon }).bindPopup(data.trainnumber).addTo(map);
-        markers.current[data.trainnumber] = marker;
-      }
-    });
+      const socket = io("http://localhost:1337");
 
-    return () => {
-      map.remove();
-    };
+      socket.on("message", (data) => {
+        if (markers.current.hasOwnProperty(data.trainnumber)) {
+          const marker = markers.current[data.trainnumber];
+          marker.setLatLng(data.position);
+        } else {
+          let customIcon = L.icon({
+            iconUrl: icon,
+            iconSize: [32, 32],
+            shadowUrl: iconShadow,
+          })
+          const marker = L.marker(data.position, { icon: customIcon }).bindPopup(data.trainnumber).addTo(map);
+          markers.current[data.trainnumber] = marker;
+        }
+      });
+
+      return () => {
+        // map.off();
+        map.remove();
+      };
+    // if(map) {
+    //   map.remove();
+    // }
+    }
   }, []);
 
   return (<div id="map" className="map"></div>);
+  
 }
 
 export default MapView;

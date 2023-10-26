@@ -1,16 +1,13 @@
-// const express = require('express');
+import authModel from '../models/auth.js';
 import express from 'express';
 
 const router = express.Router();
 
-import auth from '../models/auth.js';
+router.get('/', (req, res) => authModel.getUsers(req, res));
+router.get('/', (req, res) => authModel.register(req, res));
+router.get('/', (req, res) => authModel.login(req, res));
+router.get('/', (req, res) => authModel.checkToken(req, res));
+router.get('/', (req, res) => authModel.ssCheckToken(req, res));
+router.get('/', (req, res) => authModel._emailExist(req, res));
 
-router.get('/', (req, res) => auth.getUsers(req, res));
-router.get('/', (req, res) => auth.register(req, res));
-router.get('/', (req, res) => auth.login(req, res));
-router.get('/', (req, res) => auth.checkToken(req, res));
-router.get('/', (req, res) => auth.ssCheckToken(req, res));
-router.get('/', (req, res) => auth._emailExist(req, res));
-
-// module.exports = router;
 export default router;

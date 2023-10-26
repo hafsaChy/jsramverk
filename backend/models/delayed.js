@@ -1,4 +1,3 @@
-// const fetch = require('node-fetch')
 import fetch from 'node-fetch';
 
 const delayed = {
@@ -50,6 +49,5 @@ const delayed = {
     }
 };
 
-// module.exports = delayed;
 export default delayed;
     

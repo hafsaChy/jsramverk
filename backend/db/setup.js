@@ -1,8 +1,3 @@
-/**
- * Connect to the database and setup it with some default data.
- */
-"use strict";
-
 import database from '../db/database';
 
 // Do it.
@@ -37,5 +32,4 @@ async function resetCollection(colName, doc=null) {
     }
 }
 
-// module.exports = resetCollection;
 export default resetCollection;

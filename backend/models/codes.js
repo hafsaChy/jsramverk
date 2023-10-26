@@ -1,5 +1,3 @@
-// const fetch = require('node-fetch')
-// const database = require('../db/database.mjs');
 import fetch from 'node-fetch';
 
 
@@ -30,5 +28,5 @@ const codes = {
         });
     }
 };
-// module.exports = codes;
+
 export default codes;

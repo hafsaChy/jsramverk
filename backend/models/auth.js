@@ -1,8 +1,5 @@
-// const database = require('../db/database.mjs');
 import database from '../db/database.js';
-// const bcrypt = require('bcryptjs');
 import bcrypt from 'bcryptjs';
-// const jwt = require('jsonwebtoken');
 import jwt from 'jsonwebtoken';
 
 const jwtSecret = process.env.JWT_SECRET;
@@ -158,5 +155,4 @@ const auth = {
     }
 };
 
-// module.exports = auth;
 export default auth;

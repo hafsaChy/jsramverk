@@ -1,12 +1,8 @@
-// const express = require('express');
+import codesModel from "../models/codes.js";
 import express from 'express';
 
 const router = express.Router();
 
-// const codes = require("../models/codes.mjs");
-import codes from "../models/codes.js";
+router.get('/', (req, res) => codesModel.getCodes(req, res));
 
-router.get('/', (req, res) => codes.getCodes(req, res));
-
-// module.exports = router;
 export default router;

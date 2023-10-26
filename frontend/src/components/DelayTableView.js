@@ -1,9 +1,69 @@
-import React, { useState, useEffect } from 'react';
+// import React, { Component } from "react";
 import Clock from './Clock'
-// import TicketView from './TicketView';
+// import TicketView from "./TicketView";
 
-// import React, { useState, useEffect } from 'react';
-// import Map from './Map';
+// class DelayTableView extends Component {
+//   constructor() {
+//     super();
+//     this.state = {
+//       delayedData: [],
+//     };
+//   }
+
+//   componentDidMount() {
+//     this.fetchDelayedData();
+//   }
+
+//   fetchDelayedData() {
+//     fetch('http://localhost:1337/delayed')
+//       .then((response) => response.json())
+//       .then((result) => {this.setState({ delayedData: result.data })})
+//       .catch((error) => console.error('Error fetching delayed data:', error))
+//   }
+
+//   outputDelay(item) {
+//     let advertised = new Date(item.AdvertisedTimeAtLocation);
+//     let estimated = new Date(item.EstimatedTimeAtLocation);
+//     const diff = Math.abs(estimated - advertised);
+//     return Math.floor(diff / (1000 * 60)) + ' minuter';
+//   };
+
+//   renderDelayedTable(data) {
+//     return data.map((item, index) => (
+//       <table className="train-table">
+//         <tbody>      
+//           <tr key={index} className="train-item" onClick={() => TicketView(item)}>
+//             <td className="train-number">{item.OperationalTrainNumber}</td>
+//             <td className="current-station">
+//               <div>{item.LocationSignature}</div>
+//               <div>
+//                 {item.FromLocation ? `${item.FromLocation[0].LocationName} -> ` : ""}
+//                 {item.ToLocation ? item.ToLocation[0].LocationName : ""}
+//               </div>
+//             </td>
+//             <td className="delay">{this.outputDelay(item)}</td>
+//           </tr>
+//         </tbody>
+//       </table>
+//     ));
+//   };
+
+//   render() {
+//     const { delayedData } = this.state;
+
+//     return (
+//       <div className="delayed">
+//         <Clock />
+//         <h1>Försenade tåg</h1>
+//         <div id="delayed-trains" className="delayed-trains">
+//           {this.renderDelayedTable(delayedData)}
+//         </div>
+//       </div>
+//     );
+//   }
+// };
+
+import React, { useState, useEffect } from 'react';
 
 const DelayTableView = ({ onTrainClick }) => {
   const [delayedData, setDelayedData] = useState([]);
@@ -13,7 +73,7 @@ const DelayTableView = ({ onTrainClick }) => {
   }, []);
 
   const fetchDelayedData = () => {
-    fetch('http://localhost:2000/delayed')
+    fetch('http://localhost:1337/delayed')
       .then((response) => response.json())
       .then((data) => setDelayedData(data.data))
       .catch((error) => console.error('Error fetching delayed data:', error));
@@ -26,33 +86,34 @@ const DelayTableView = ({ onTrainClick }) => {
     return Math.floor(diff / (1000 * 60)) + ' minuter';
   };
 
-  return ( <>
-  <div className="delayed">
-    <Clock />
-    <h1>Försenade tåg</h1>
-    <table className="train-table">
-      <tbody>
-        {delayedData.map((item, index) => (
-          <tr
-            key={index}
-            className="train-item"
-            onClick={() => onTrainClick(item)}
-          >
-            <td className="train-number">{item.OperationalTrainNumber}</td>
-            <td className="current-station">
-              <div>{item.LocationSignature}</div>
-              <div>
-                {item.FromLocation ? `${item.FromLocation[0].LocationName} -> ` : ''}
-                {item.ToLocation ? item.ToLocation[0].LocationName : ''}
-              </div>
-            </td>
-            <td className="delay">{outputDelay(item)}</td>
-          </tr>
-        ))}
-      </tbody>
-    </table>
-  </div>
-    </>
+  return (
+    <div className="delayed">
+      <Clock />
+      <h1>Försenade tåg</h1>
+      <div id="delayed-trains" className="delayed-trains">
+        <table className="train-table">
+        <tbody>
+          {delayedData.map((item, index) => (
+            <tr
+              key={index}
+              className="train-item"
+              onClick={() => onTrainClick(item)}
+            >
+              <td className="train-number">{item.OperationalTrainNumber}</td>
+              <td className="current-station">
+                <div>{item.LocationSignature}</div>
+                <div>
+                  {item.FromLocation ? `${item.FromLocation[0].LocationName} -> ` : ''}
+                  {item.ToLocation ? item.ToLocation[0].LocationName : ''}
+                </div>
+              </td>
+              <td className="delay">{outputDelay(item)}</td>
+            </tr>
+          ))}
+        </tbody>
+        </table>
+      </div>
+    </div>
   );
 };
 
