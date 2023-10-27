@@ -28,29 +28,66 @@ const tickets = {
         });
     },
 
-    createTicket: async function createTicket(args) {
+    createTicket: async function createTicket(req, res) {
+        // Access a MongoClient object
+        const db = await database.openDb();
+
+        // Get the collection object
+        const collection = db.collection(collectionName);
+
+        // Create new document (ticket) in the collection (trains)
+        let newTicket = req.body;
+
+        await collection.insertOne(newTicket);
+
+        // Close the database connection
+        await db.client.close();
+
+        // Print all documents to the console
+        console.log(newTicket);
+        return res.json({
+            data: newTicket
+        });
+    },
+
+    updateTicket: async function updateTicket(args) {
         const db = await database.openDb();
         const collection = await db.collection(collectionName);
-        // Create a new ObjectId for the new document
-        const newId = new ObjectId();
+        // Create ObjectId based on given _id string
+        const ticketId = new ObjectId(args._id);
 
-        const result = await collection.insertOne({
-            _id: newId,
-            code: args.code,
-            trainnumber: args.trainnumber,
-            traindate: args.traindate
-        });
+        const result = await collection.updateOne(
+            { _id: ticketId },
+            { $set: { code: args.code } }
+        );
 
         await db.client.close();
 
-        // Here we return the string of the ObjectId but alternatives are available
-        // https://www.mongodb.com/docs/manual/reference/method/ObjectId/#ObjectId
-        return result.json({
-            _id: newId.toString(),
-            code: args.code,
-            trainnumber: args.trainnumber,
-            traindate: args.traindate,
-        });
+        if ( result.modifiedCount > 0 ) {
+            return {
+                _id: args._id,
+                code: args.code
+            };
+        }
+    },
+
+    deleteTicket: async function deleteTicket(args) {
+        const db = await database.openDb();
+        const collection = await db.collection(collectionName);
+        // Create ObjectId based on given _id string
+        const ticketId = new ObjectId(args._id);
+
+        const result = await collection.deleteOne(
+            { _id: ticketId }
+        );
+
+        await db.client.close();
+
+        if ( result.deletedCount > 0 ) {
+            return {
+                _id: args._id
+            }
+        }
     }
 };
 

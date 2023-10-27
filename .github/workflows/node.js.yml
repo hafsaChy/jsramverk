@@ -39,4 +39,4 @@ jobs:
     - name: Npm test
       run: npm test
       env:
-        REACT_APP_TRV_APIKEY : ${{ secrets.REACT_APP_TRV_APIKEY }}
+        REACT_APP_TRV_APIKEY : ${{ env.REACT_APP_TRV_APIKEY }}

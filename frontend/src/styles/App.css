@@ -145,6 +145,7 @@ p {
   padding: 2rem;
   background-color: #1c1b1b;
   color: rgb(238, 234, 234);
+  overflow: scroll;
 }
 
 .train-item {
