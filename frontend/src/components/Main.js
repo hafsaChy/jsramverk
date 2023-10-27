@@ -1,9 +1,9 @@
 import React, { useState } from 'react';
-import DelayTableView from './DelayTableView.js';
-import TicketView from './TicketView.js';
-import MapView from './MapView.js';
+import DelayTableView from './DelayTable.js';
+import TicketView from './Ticket.js';
+import MapView from './Map.js';
 
-const MainView = () => {
+const Main = () => {
   const [selectedTrain, setSelectedTrain] = useState(null);
 
   const handleTrainClick = (train) => {
@@ -22,4 +22,4 @@ const MainView = () => {
   );
 }
 
-export default MainView;
+export default Main;

@@ -1,7 +1,7 @@
 import { Button, TextField } from "@mui/material";
 import { useContext, useState } from "react";
 import { Link, useLocation, useNavigate } from "react-router-dom";
-import { UserContext } from "../contexts/user.context";
+import { UserContext } from "../contexts/usercontext";
  
 const Signup = () => {
  const navigate = useNavigate();

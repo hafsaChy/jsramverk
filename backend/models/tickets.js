@@ -1,5 +1,5 @@
 import database from '../db/database.js';
-// import { ObjectId } from 'mongodb';
+import { ObjectId } from 'mongodb';
 const collectionName = "tickets";
 let dbName = "trains";
 
@@ -11,12 +11,6 @@ const tickets = {
     getTickets: async function getTickets(req, res) {
         // Access a MongoClient object
         const db = await database.openDb();
-
-        // Connect to the database
-        // await client.connect();
-
-        // Get the database object
-        // const db = client.db(dbName);
 
         // Get the collection object
         const collection = db.collection(collectionName);
@@ -34,31 +28,28 @@ const tickets = {
         });
     },
 
-    createTicket: async function createTicket(req, res) {
-        // Access a MongoClient object
+    createTicket: async function createTicket(args) {
         const db = await database.openDb();
+        const collection = await db.collection(collectionName);
+        // Create a new ObjectId for the new document
+        const newId = new ObjectId();
 
-        // Connect to the database
-        // await client.connect();
+        const result = await collection.insertOne({
+            _id: newId,
+            code: args.code,
+            trainnumber: args.trainnumber,
+            traindate: args.traindate
+        });
 
-        // Get the database object
-        // const db = client.db(dbName);
-
-        // Get the collection object
-        const collection = db.collection(collectionName);
-
-        // Create new document (ticket) in the collection (trains)
-        let newTicket = req.body;
-
-        await collection.insertOne(newTicket);
-
-        // Close the database connection
         await db.client.close();
 
-        // Print all documents to the console
-        console.log(newTicket);
-        return res.json({
-            data: newTicket
+        // Here we return the string of the ObjectId but alternatives are available
+        // https://www.mongodb.com/docs/manual/reference/method/ObjectId/#ObjectId
+        return result.json({
+            _id: newId.toString(),
+            code: args.code,
+            trainnumber: args.trainnumber,
+            traindate: args.traindate,
         });
     }
 };

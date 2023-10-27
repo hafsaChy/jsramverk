@@ -4,7 +4,7 @@ import * as L from 'leaflet';
 import icon from "leaflet/dist/images/marker-icon.png";
 import iconShadow from "leaflet/dist/images/marker-shadow.png";
 
-const MapView = () => {
+const Map = () => {
   const mapContainer = useRef(null);
   const markers = useRef({});
 
@@ -45,4 +45,4 @@ const MapView = () => {
   
 }
 
-export default MapView;
+export default Map;

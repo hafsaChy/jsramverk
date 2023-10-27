@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 
-const TicketView = ({ selectedTrain, onBackClick }) => {
+const Ticket = ({ selectedTrain, onBackClick }) => {
   const [reasonCodes, setReasonCodes] = useState([]);
   const [newTicketId, setNewTicketId] = useState(0);
   const [existingTickets, setExistingTickets] = useState([]);
@@ -81,7 +81,7 @@ const TicketView = ({ selectedTrain, onBackClick }) => {
   return (
     <div className="ticket-container">
       <div className="ticket">
-        <a href="tickets" onClick={onBackClick}>
+        <a href="home" onClick={onBackClick}>
           Tillbaka
         </a>
         <h1>Nytt ärende #{newTicketId}</h1>
@@ -105,4 +105,4 @@ const TicketView = ({ selectedTrain, onBackClick }) => {
   );
 }
 
-export default TicketView;
+export default Ticket;
