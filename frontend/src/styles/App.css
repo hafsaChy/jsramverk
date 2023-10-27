@@ -272,3 +272,31 @@ p {
   float: left;
   width: 60%; /* Adjust as needed */
 }
+
+select, option {
+  width: 80%;
+  z-index: 1;
+  height: 25px;
+}
+
+input[type=submit] {
+  background-color: #54605b;
+  border: none;
+  color: white;
+  padding: 10px 32px;
+  text-decoration: none;
+  margin: 4px 2px;
+  cursor: pointer;
+  border-radius: 5px;
+}
+
+.back {
+  background-color: #04AA6D;
+  border: none;
+  color: white;
+  padding: 10px 32px;
+  text-decoration: none;
+  margin: 4px 2px;
+  cursor: pointer;
+  border-radius: 5px;
+}

@@ -81,9 +81,9 @@ const Ticket = ({ selectedTrain, onBackClick }) => {
   return (
     <div className="ticket-container">
       <div className="ticket">
-        <a href="home" onClick={onBackClick}>
+        <button className='back' href="home" onClick={onBackClick}>
           Tillbaka
-        </a>
+        </button>
         <h1>Nytt ärende #{newTicketId}</h1>
         <form onSubmit={handleFormSubmit}>
           <label>Orsakskod</label>
