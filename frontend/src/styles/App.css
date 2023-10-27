@@ -48,8 +48,8 @@ html {
 }
 
 body {
-  background-color: #1c1b1b;
-  color: rgb(238, 234, 234);
+  background-color: white;
+  color: rgb(22, 21, 21);
   line-height: 1.4;
   font-family: monospace;
   font-size: calc(10px + 1vmin);
@@ -100,6 +100,7 @@ p {
   height: 100vh;
   width: 40vw;
   overflow: scroll;
+  background-color: #1c1b1b;
   color: rgb(238, 234, 234);
 }
 
@@ -142,6 +143,8 @@ p {
 
 .ticket-container {
   padding: 2rem;
+  background-color: #1c1b1b;
+  color: rgb(238, 234, 234);
 }
 
 .train-item {

@@ -1,12 +1,12 @@
 // import React, { Component } from "react";
-import Clock from './Clock'
-// import TicketView from "./TicketView";
+// import Clock from './Clock'
+// // import TicketView from "./TicketView";
 
 // class DelayTableView extends Component {
 //   constructor() {
 //     super();
 //     this.state = {
-//       delayedData: [],
+//       delayedData: []
 //     };
 //   }
 
@@ -17,7 +17,7 @@ import Clock from './Clock'
 //   fetchDelayedData() {
 //     fetch('http://localhost:1337/delayed')
 //       .then((response) => response.json())
-//       .then((result) => {this.setState({ delayedData: result.data })})
+//       .then((result) => this.setState(result.data))
 //       .catch((error) => console.error('Error fetching delayed data:', error))
 //   }
 
@@ -32,7 +32,7 @@ import Clock from './Clock'
 //     return data.map((item, index) => (
 //       <table className="train-table">
 //         <tbody>      
-//           <tr key={index} className="train-item" onClick={() => TicketView(item)}>
+//           <tr key={index} className="train-item">
 //             <td className="train-number">{item.OperationalTrainNumber}</td>
 //             <td className="current-station">
 //               <div>{item.LocationSignature}</div>
@@ -64,6 +64,7 @@ import Clock from './Clock'
 // };
 
 import React, { useState, useEffect } from 'react';
+import Clock from './Clock'
 
 const DelayTableView = ({ onTrainClick }) => {
   const [delayedData, setDelayedData] = useState([]);
@@ -75,7 +76,7 @@ const DelayTableView = ({ onTrainClick }) => {
   const fetchDelayedData = () => {
     fetch('http://localhost:1337/delayed')
       .then((response) => response.json())
-      .then((data) => setDelayedData(data.data))
+      .then((result) => setDelayedData(result.data))
       .catch((error) => console.error('Error fetching delayed data:', error));
   };
 
@@ -86,32 +87,32 @@ const DelayTableView = ({ onTrainClick }) => {
     return Math.floor(diff / (1000 * 60)) + ' minuter';
   };
 
+  const renderDelayedTable = (data) => {
+    return data.map((item, index) => (
+      <table className="train-table">
+        <tbody>      
+          <tr key={index} className="train-item" onClick={() => onTrainClick(item)}>
+            <td className="train-number">{item.OperationalTrainNumber}</td>
+            <td className="current-station">
+              <div>{item.LocationSignature}</div>
+              <div>
+                {item.FromLocation ? `${item.FromLocation[0].LocationName} -> ` : ""}
+                {item.ToLocation ? item.ToLocation[0].LocationName : ""}
+              </div>
+            </td>
+            <td className="delay">{outputDelay(item)}</td>
+          </tr>
+        </tbody>
+      </table>
+    ));
+  };
+  
   return (
     <div className="delayed">
       <Clock />
       <h1>Försenade tåg</h1>
       <div id="delayed-trains" className="delayed-trains">
-        <table className="train-table">
-        <tbody>
-          {delayedData.map((item, index) => (
-            <tr
-              key={index}
-              className="train-item"
-              onClick={() => onTrainClick(item)}
-            >
-              <td className="train-number">{item.OperationalTrainNumber}</td>
-              <td className="current-station">
-                <div>{item.LocationSignature}</div>
-                <div>
-                  {item.FromLocation ? `${item.FromLocation[0].LocationName} -> ` : ''}
-                  {item.ToLocation ? item.ToLocation[0].LocationName : ''}
-                </div>
-              </td>
-              <td className="delay">{outputDelay(item)}</td>
-            </tr>
-          ))}
-        </tbody>
-        </table>
+        {renderDelayedTable(delayedData)}
       </div>
     </div>
   );

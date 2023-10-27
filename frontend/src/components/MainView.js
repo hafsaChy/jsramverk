@@ -2,7 +2,6 @@ import React, { useState } from 'react';
 import DelayTableView from './DelayTableView.js';
 import TicketView from './TicketView.js';
 import MapView from './MapView.js';
-import { withRouter } from "./utils.js";
 
 const MainView = () => {
   const [selectedTrain, setSelectedTrain] = useState(null);
@@ -23,4 +22,4 @@ const MainView = () => {
   );
 }
 
-export default withRouter(MainView);
+export default MainView;
