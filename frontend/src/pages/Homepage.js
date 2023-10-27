@@ -2,7 +2,7 @@ import { Button } from '@mui/material'
 import { useContext } from 'react';
 import { UserContext } from '../contexts/usercontext';
 import '../styles/App.css';
-import MainView from '../components/Main';
+import Main from '../components/Main';
 
 export default function Home() {
  const { logOutUser } = useContext(UserContext);
@@ -30,7 +30,7 @@ export default function Home() {
         <Button variant="contained" onClick={logOut}>Logout</Button>
       </header>
       <div className="container">
-        <MainView />
+        <Main />
       </div>
 
     </div>

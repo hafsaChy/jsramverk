@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
-import DelayTableView from './DelayTable.js';
-import TicketView from './Ticket.js';
-import MapView from './Map.js';
+import DelayTable from './DelayTable.js';
+import Ticket from './Ticket.js';
+import Map from './Map.js';
 
 const Main = () => {
   const [selectedTrain, setSelectedTrain] = useState(null);
@@ -13,11 +13,11 @@ const Main = () => {
   return (
     <>
       {selectedTrain ? (
-        <TicketView selectedTrain={selectedTrain} onBackClick={() => setSelectedTrain(null)} />
+        <Ticket selectedTrain={selectedTrain} onBackClick={() => setSelectedTrain(null)} />
       ) : (
-        <DelayTableView onTrainClick={handleTrainClick} />
+        <DelayTable onTrainClick={handleTrainClick} />
       )}
-      <MapView />
+      <Map />
     </>
   );
 }
