@@ -30,6 +30,7 @@
     "mongoose": "^7.6.1",
     "morgan": "^1.10.0",
     "node-fetch": "^2.6.1",
+    "or": "^0.2.0",
     "socket.io": "^4.7.2",
     "sqlite": "^4.2.1",
     "sqlite3": "^5.1.6"
