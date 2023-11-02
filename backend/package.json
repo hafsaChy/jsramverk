@@ -30,9 +30,16 @@
     "mongoose": "^7.6.1",
     "morgan": "^1.10.0",
     "node-fetch": "^2.6.1",
-    "or": "^0.2.0",
     "socket.io": "^4.7.2",
     "sqlite": "^4.2.1",
     "sqlite3": "^5.1.6"
+  },
+  "devDependencies": {
+    "chai": "^4.3.10",
+    "chai-http": "^4.4.0",
+    "eslint": "^8.52.0",
+    "eslint-plugin-react": "^7.33.2",
+    "javascript-style-guide": "^1.0.1",
+    "nyc": "^15.1.0"
   }
 }

@@ -1,4 +1,4 @@
-import database from '../db/database';
+import database from '../db/database.js';
 
 // Do it.
 resetCollection("tickets");

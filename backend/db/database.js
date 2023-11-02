@@ -26,11 +26,6 @@ const database = {
                 dbName = 'test';
             } 
             const dsn = `mongodb+srv://${dbUser}:${dbPass}@cluster0.v8m4hqa.mongodb.net/?retryWrites=true&w=majority`;
-            //const dsn = `mongodb+srv://${dbUser}:${dbPass}@cluster0.5grf0fy.mongodb.net/?retryWrites=true&w=majority`;
-
-            //const dsn = `mongodb://${dbUser}:${dbPass}@mongodb/myDatabase?directConnection=true`;
-
-            //const dsn = mongodb://myUserId:myPassword@mongodb/myDatabase?directConnection=true
 
             const client = new MongoClient(dsn);
 
