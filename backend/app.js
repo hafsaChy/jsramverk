@@ -34,7 +34,7 @@ const io = new Server (httpServer, {
   },
 });
 
-const port = process.env.PORT || 1337;
+// const port = process.env.PORT || 1337;
 // const port = 1337;
 
 app.get('/', (req, res) => {
@@ -49,9 +49,9 @@ app.use('/codes', codes);
 app.use('/trains', trains);
 
 // Start server
-httpServer.listen(port, () => {
-  console.log(`Example app listening on port ${port}`);
-});
+// httpServer.listen(port, () => {
+//   console.log(`Example app listening on port ${port}`);
+// });
 
 // Used for moving trains
 trainsModel.fetchTrainPositions(io);
