@@ -13,7 +13,8 @@
     "posttest": "npm run eslint",
     "start": "node app.js",
     "eslint": "eslint .",
-    "watch": "nodemon app.js"
+    "watch": "nodemon app.js",
+    "production": "NODE_ENV='production' node app.js"
   },
   "keywords": [],
   "author": "",
@@ -25,6 +26,7 @@
     "dotenv": "^16.3.1",
     "eventsource": "^2.0.2",
     "express": "^4.18.2",
+    "glob-parent": "^6.0.2",
     "jsonwebtoken": "^9.0.2",
     "mongodb": "^6.1.0",
     "mongoose": "^7.6.1",
@@ -39,6 +41,7 @@
     "eslint": "^8.52.0",
     "eslint-plugin-react": "^7.33.2",
     "javascript-style-guide": "^1.0.1",
+    "mocha": "^10.2.0",
     "nodemon": "^3.0.2",
     "nyc": "^15.1.0"
   }
