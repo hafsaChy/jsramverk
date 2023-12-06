@@ -25,7 +25,7 @@ const database = {
             if (process.env.NODE_ENV === 'test') {
                 dbName = 'test';
             } 
-            const dsn = `mongodb+srv://${dbUser}:${dbPass}@jsramverk.dmvxw4g.mongodb.net/?retryWrites=true&w=majority`;
+            const dsn = `mongodb+srv://${dbUser}:${dbPass}@jsramverk.k20ii9n.mongodb.net/?retryWrites=true&w=majority`;
 
             const client = new MongoClient(dsn);
 
