@@ -7,7 +7,7 @@ import Signup from "./pages/Signuppage";
  
 function App() {
  return (
-   <BrowserRouter>
+   <BrowserRouter basement={ process.env.PUBLIC_URL }>
      {/* We are wrapping our whole app with UserProvider so that */}
      {/* our user is accessible through out the app from any page*/}
      <UserProvider>
@@ -25,5 +25,5 @@ function App() {
    </BrowserRouter>
  );
 }
- 
+
 export default App;

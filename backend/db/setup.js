@@ -2,6 +2,7 @@ import database from '../db/database.js';
 
 // Do it.
 resetCollection("tickets");
+global.setImmediate = setTimeout;
 
 /**
  * Reset a collection by removing existing content.
