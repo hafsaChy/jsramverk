@@ -4,48 +4,23 @@
   "icons": [
     {
       "src": "favicon.ico",
-      "sizes": "64x64",
+      "sizes": "64x64 32x32 24x24 16x16",
       "type": "image/x-icon"
     },
     {
       "src": "logo192.png",
       "type": "image/png",
-      "sizes": "192x192",
-      "purpose": "any"
+      "sizes": "192x192"
     },
     {
       "src": "logo512.png",
       "type": "image/png",
-      "sizes": "512x512",
-      "purpose": "maskable"
+      "sizes": "512x512"
     }
   ],
-  "screenshots": [
-    {
-      "src": "logo512.png",
-      "type": "image/png",
-      "sizes": "512x512",
-      "form_factor": "wide",
-      "label": "Wonder Widgets"
-    },
-    {
-      "src": "logo512.png",
-      "type": "image/png",
-      "sizes": "512x512",
-      "form_factor": "narrow",
-      "label": "Wonder Widgets"
-    }
-  ],
-  "id": "/~glpa22/editor/",
-  "start_url": "/index.html",
+  "start_url": ".",
+  "display_override": ["fullscreen", "minimal-ui"],
   "display": "standalone",
   "theme_color": "#000000",
-  "background_color": "#ffffff",
-  "display_override": ["window-controls-overlay"],
-  "protocol_handlers": [
-    {
-      "protocol": "web+editor",
-      "url": "/index.html%s"
-    }
-  ]
+  "background_color": "#ffffff"
 }
