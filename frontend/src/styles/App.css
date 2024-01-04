@@ -300,3 +300,11 @@ input[type=submit] {
   cursor: pointer;
   border-radius: 5px;
 }
+
+.leaflet-overlay-pane svg {
+  -webkit-user-select: text; /* Safari fallback only */
+  -webkit-user-select: all; /* Chrome/Safari */
+  -moz-user-select: all; /* Firefox */
+  -ms-user-select: all; /* IE10+ */
+  user-select: all;
+}
