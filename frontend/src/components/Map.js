@@ -1,8 +1,9 @@
-import io from 'socket.io-client'
+// import io from 'socket.io-client'
 import React, { useEffect, useRef } from 'react';
 import * as L from 'leaflet';
 import icon from "leaflet/dist/images/marker-icon.png";
 import iconShadow from "leaflet/dist/images/marker-shadow.png";
+import { socket } from './socket';
 
 const Map = () => {
   const mapContainer = useRef(null);
@@ -18,8 +19,8 @@ const Map = () => {
       attribution: '&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
     }).addTo(map);
 
-    const socket = io("http://localhost:1337");
-
+    // const socket = io("http://localhost:1337");
+    socket.connect();
     socket.on("message", (data) => {
       if (markers.current.hasOwnProperty(data.trainnumber)) {
         const marker = markers.current[data.trainnumber];
@@ -38,7 +39,7 @@ const Map = () => {
     return () => {
       map.off();
       map.remove();
-    };
+    }; // eslint-disable-next-line
   }, []);
 
   return (<div id="map" className="map"></div>);

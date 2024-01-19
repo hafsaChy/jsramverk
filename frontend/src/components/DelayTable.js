@@ -1,15 +1,18 @@
 import React, { useState, useEffect } from 'react';
 import Clock from './Clock'
+import { config } from '../Constants';
+const URL = config.url;
 
 const DelayTable = ({ onTrainClick }) => {
   const [delayedData, setDelayedData] = useState([]);
+  const endpoint = `${URL}/delayed`;
 
   useEffect(() => {
-    fetchDelayedData();
+    fetchDelayedData(); // eslint-disable-next-line
   }, []);
 
   const fetchDelayedData = () => {
-    fetch('http://localhost:1337/delayed')
+    fetch(endpoint)
       .then((response) => response.json())
       .then((result) => setDelayedData(result.data))
       .catch((error) => console.error('Error fetching delayed data:', error));
