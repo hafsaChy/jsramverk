@@ -38,7 +38,7 @@ app.use(bodyParser.urlencoded({ extended: true }));
 
 const io = new Server (httpServer, {
   cors: {
-    origin: 'http://localhost:3000',
+    origin: "http://localhost:3000, http://localhost:1337, https://www.student.bth.se",
     methods: ['GET', 'POST'],
   },
 });
