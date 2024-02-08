@@ -68,7 +68,7 @@ const Ticket = ({ selectedTrain, onBackClick }) => {
       traindate: selectedTrain.EstimatedTimeAtLocation.substring(0, 10),
     };
 
-    fetch(endpoint, {
+    fetch(endpoint1, {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
@@ -77,7 +77,7 @@ const Ticket = ({ selectedTrain, onBackClick }) => {
     })
       .then((response) => response.json())
       .then(() => {
-        fetchExistingTickets(); // Uppdatera befintliga ärenden efter att ett nytt ärende skapats
+        fetchExistingTickets();
       })
       .catch((error) => console.error('Error creating new ticket:', error));
   };
