@@ -18,8 +18,7 @@
       "sizes": "512x512"
     }
   ],
-  "id": "/~glpa22/editor/",
-  "start_url": "/~glpa22/editor/",
+  "start_url": ".",
   "display_override": ["fullscreen", "minimal-ui"],
   "display": "standalone",
   "theme_color": "#000000",

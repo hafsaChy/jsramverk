@@ -19,8 +19,8 @@ import indexRouter from './routes/index.js';
 import usersRouter from './routes/users.js';
 import { fileURLToPath } from 'url';
 
-// const __filename = fileURLToPath(import.meta.url);
-// const __dirname = path.dirname(__filename);
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = path.dirname(__filename);
 const app = express();
 const httpServer = createServer(app); // Create the HTTP server instance
 
@@ -36,9 +36,20 @@ app.disable('x-powered-by');
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 
+var allowedOrigins = ['http://localhost:3000', 'http://localhost:1337', 'https://www.student.bth.se'];
+
 const io = new Server (httpServer, {
   cors: {
-    origin: "http://localhost:3000, http://localhost:1337, https://www.student.bth.se",
+    origin: function(origin, callback){
+      // allow requests with no origin (like mobile apps or curl requests)
+      if(!origin) return callback(null, true);
+      if(allowedOrigins.indexOf(origin) === -1){
+        var msg = 'The CORS policy for this site does not allow access from the specified Origin.';
+        return callback(new Error(msg), false);
+      }
+      return callback(null, true);
+    },
+    // origin: "http://localhost:3000, http://localhost:1337, https://www.student.bth.se",
     methods: ['GET', 'POST'],
   },
 });
@@ -90,14 +101,14 @@ app.use((err, req, res, next) => {
 });
 
 // view engine setup
-// app.set('views', path.join(__dirname, 'views'));
+app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'ejs');
 
 app.use(logger('dev'));
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
-// app.use(express.static(path.join(__dirname, 'public')));
+app.use(express.static(path.join(__dirname, 'public')));
 
 app.use('/', indexRouter);
 app.use('/users', usersRouter);
