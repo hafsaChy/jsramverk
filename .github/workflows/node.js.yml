@@ -42,7 +42,7 @@ jobs:
     - name: Lint backend routes
       run: |
         cd backend
-        #npm run lint -- routes/*.js
+        npm run lint -- routes/*.js
 
 
 # on:
