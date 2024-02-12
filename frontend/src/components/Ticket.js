@@ -12,7 +12,8 @@ const Ticket = ({ selectedTrain, onBackClick }) => {
   useEffect(() => {
     fetchReasonCodes();
     fetchTicketId();
-    fetchExistingTickets(); // eslint-disable-next-line
+    fetchExistingTickets(); 
+    // eslint-disable-next-line
   }, []);
 
   const fetchReasonCodes = () => {

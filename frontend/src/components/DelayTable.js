@@ -5,7 +5,7 @@ const URL = config.url;
 
 const DelayTable = ({ onTrainClick }) => {
   const [delayedData, setDelayedData] = useState([]);
-  const endpoint = `${URL}/delayed`;
+  const endpoint = `${URL}/delayed/`;
 
   useEffect(() => {
     fetchDelayedData(); // eslint-disable-next-line
