@@ -107,6 +107,8 @@
             "error",
             "any"
         ],
+        "no-unused-vars": ["error", { "argsIgnorePattern": "^_" }],
+
         "no-console": 0
     }
 }

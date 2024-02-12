@@ -24,7 +24,7 @@ const database = {
             // Use test database when doing test
             if (process.env.NODE_ENV === 'test') {
                 dbName = 'test';
-            } 
+            }
             const dsn = `mongodb+srv://${dbUser}:${dbPass}@jsramverk.k20ii9n.mongodb.net/?retryWrites=true&w=majority`;
 
             const client = new MongoClient(dsn);
@@ -32,7 +32,6 @@ const database = {
             const db = client.db(dbName);
 
             return db;
-            
         } catch (err) {
             console.error("Error connecting to MongoDB:", err);
             throw err;

@@ -33,6 +33,7 @@ const delayed = {
                 <INCLUDE>TrainOwner</INCLUDE>
             </QUERY>
         </REQUEST>`;
+
         fetch(
             "https://api.trafikinfo.trafikverket.se/v2/data.json", {
                 method: "POST",
@@ -50,4 +51,3 @@ const delayed = {
 };
 
 export default delayed;
-    

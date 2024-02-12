@@ -86,7 +86,7 @@ const tickets = {
         if ( result.deletedCount > 0 ) {
             return {
                 _id: args._id
-            }
+            };
         }
     }
 };
