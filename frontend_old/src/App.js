@@ -7,7 +7,7 @@ import Signup from "./pages/Signuppage";
  
 function App() {
  return (
-   <HashRouter basename="/" >
+   <HashRouter basename="/">
      {/* We are wrapping our whole app with UserProvider so that */}
      {/* our user is accessible through out the app from any page*/}
      <UserProvider>

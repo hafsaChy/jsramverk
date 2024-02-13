@@ -39,7 +39,7 @@ const Map = () => {
     return () => {
       map.off();
       map.remove();
-    }; // eslint-disable-next-line
+    };
   }, []);
 
   return (<div id="map" className="map"></div>);
