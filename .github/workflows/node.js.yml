@@ -39,6 +39,8 @@ jobs:
       run: |
         cd frontend
         #npm install
+        npm run clean
+        npm install --legacy-peer-deps
 
     - name: Lint backend routes
       run: |
