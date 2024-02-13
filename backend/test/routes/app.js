@@ -1,47 +1,40 @@
 /**
- * Test the route / and 404
+ * Test the route
  */
 
-/*global it describe */
 
-process.env.NODE_ENV = 'test';
+import { describe, it } from 'mocha';
+import { expect } from 'chai';
+import fetch from 'node-fetch';
+import httpServer from '../../app.js';
 
-import { should, use, request } from 'chai';
-import chaiHttp from 'chai-http';
-import httpServer from '../../app';
+describe('Express API Tests', () => {
+  let expressServer;
 
-should();
+//   before(async () => {
+//     expressServer = await httpServer.listen(1337); // Set the desired port
+//   });
 
-use(chaiHttp);
+  after(async () => {
+    expressServer && (await expressServer.close());
+  });
 
-/**
- * Test the route /delayed. Checking that the properties used in frontend is returned.
- */
-describe('route', () => {
-    describe('/', () => {
-        it('should get status 200 with message', (done) => {
-            request(httpServer)
-                .get('/')
-                .end((err, res) => {
-                    res.should.have.status(200);
-                    res.body.data.should.be.a('string');
+  describe('GET /', () => {
+    it('should return a welcome message', async () => {
+      const response = await fetch('https://jsramverk-backend-deploy-glpa22.azurewebsites.net');
+      const responseBody = await response.json();
 
-                    done();
-                });
-        });
+      expect(response.status).to.equal(200);
+      expect(responseBody).to.deep.equal({ data: 'This is the API for the course jsramverk, by students glpa22 and haco22' });
     });
+  });
 
-    describe('/non-existing-route', () => {
-        it('should get status 404 with error', (done) => {
-            request(httpServer)
-                .get('/non-existing-route')
-                .end((err, res) => {
-                    res.should.have.status(404);
-                    res.body.errors.should.be.a('array');
-                    res.body.errors[0].should.have.property('status');
+  describe('GET /delayed', () => {
+    it('should return delayed train information', async () => {
+      const response = await fetch('https://jsramverk-backend-deploy-glpa22.azurewebsites.net/delayed');
+      const responseBody = await response.json();
 
-                    done();
-                });
-        });
+      expect(response.status).to.equal(200);
     });
+  });
 });

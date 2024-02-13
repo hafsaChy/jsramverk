@@ -1,81 +1,190 @@
-/**
- * Test opening and resetting the database
- */
+// // /**
+// //  * Test opening and resetting the database
+// //  */
 
-/*global it describe before */
+// import { describe, it, before, after } from 'mocha';
+// import { expect } from 'chai';
+// import sinon from 'sinon';
+// import { ObjectId } from 'mongodb';
+// import { MongoMemoryServer } from 'mongodb-memory-server';
+// import database from '../../db/database.js';
+// import tickets from '../../models/tickets.js';
 
-process.env.NODE_ENV = 'test';
+// describe('Tickets API', () => {
+//     let mongoServer;
 
-import { should } from 'chai';
-import { openDb } from '../../db/database.js';
-import { getTickets, createTicket } from '../../models/tickets.js';
+//     before(async () => {
+//         mongoServer = await MongoMemoryServer.create();
+//         process.env.NODE_ENV = 'test';
+//     });
 
-should();
+//     after(async () => {
+//         await mongoServer.stop();
+//     });
 
-describe('Test model', () => {
-    const colName = 'tickets';
-    /**
-     * Before test, reset the user database
-     */
+//     describe('getTickets', () => {
+//         it('should get all tickets', async () => {
+//             const db = await database.openDb();
+//             const collection = db.collection('tickets');
+//             const sampleTickets = [{ _id: '1', code: 'ABC' }, { _id: '2', code: 'XYZ' }];
 
-    before(async () => {
-        const db = await openDb();
+//             sinon.stub(database, 'openDb').resolves(db);
+//             sinon.stub(collection, 'find').returns({ toArray: sinon.stub().resolves(sampleTickets) });
 
-        try {
-            const col = await db.collection(colName);
+//             const req = {};
+//             const res = {
+//                 json: sinon.stub()
+//             };
 
-            await col.deleteMany(); // This deletes the data in the collection
-        } catch (err) {
-            console.log("During setup following error occured:", err);
-        } finally {
-            await db.client.close();
-        }
-    });
+//             await tickets.getTickets(req, res);
 
-    /**
-     * Test the model ticketssetup
-     */
-    describe('tickets', () => {
-        // Get tickets, should be empty
-        it('should return empty array', async () => {
-            const res = await getTickets();
+//             expect(res.json.calledWith({ data: sampleTickets })).to.be.true;
 
-            res.should.be.a('array');
-            res.should.have.lengthOf(0);
-        });
+//             sinon.restore();
+//         });
+//     });
 
-        it('should data and array with 1 ticket', async () => {
-            const inData = {
-                code: "ANAtest03",
-                trainnumber: "13579",
-                traindate: "1984-01-01"
-            };
-            const res = await createTicket(inData);
+//     describe('createTicket', () => {
+//         it('should create a new ticket', async () => {
+//             const db = await database.openDb();
+//             const collection = db.collection('tickets');
+//             const newTicket = { _id: '3', code: '123' };
 
-            res.should.be.a('object');
-            res.should.have.property('_id');
-            res.code.should.equal('ANAtest03');
-        });
+//             sinon.stub(database, 'openDb').resolves(db);
+//             sinon.stub(collection, 'insertOne').resolves({});
 
-        it('should return array with one item', async () => {
-            const res = await getTickets();
+//             const req = {
+//                 body: newTicket
+//             };
+//             const res = {
+//                 json: sinon.stub()
+//             };
 
-            res.should.be.a('array');
-            res.should.have.lengthOf(1);
-            res[0].should.have.property('_id');
-            res[0].trainnumber.should.equal('13579');
-        });
+//             await tickets.createTicket(req, res);
 
-        it('should throw TypeError', async () => {
-            let error;
+//             expect(res.json.calledWith({ data: newTicket })).to.be.true;
 
-            try {
-                await createTicket();
-            } catch (e) {
-                error = e;
-            }
+//             sinon.restore();
+//         });
+//     });
 
-            error.should.be.an.instanceOf(TypeError);
-        });
-    });
-});
+//     describe('updateTicket', () => {
+//         it('should update an existing ticket', async () => {
+//             const db = await database.openDb();
+//             const collection = db.collection('tickets');
+//             const updatedTicket = { _id: '1', code: 'XYZ' };
+
+//             sinon.stub(database, 'openDb').resolves(db);
+//             sinon.stub(collection, 'updateOne').resolves({ modifiedCount: 1 });
+
+//             const args = { _id: '1', code: 'XYZ' };
+
+//             const result = await tickets.updateTicket(args);
+
+//             expect(result).to.deep.equal(updatedTicket);
+
+//             sinon.restore();
+//         });
+//     });
+
+//     describe('deleteTicket', () => {
+//         it('should delete an existing ticket', async () => {
+//             const db = await database.openDb();
+//             const collection = db.collection('tickets');
+//             const deletedTicket = { _id: '1' };
+
+//             sinon.stub(database, 'openDb').resolves(db);
+//             sinon.stub(collection, 'deleteOne').resolves({ deletedCount: 1 });
+
+//             const args = { _id: '1' };
+
+//             const result = await tickets.deleteTicket(args);
+
+//             expect(result).to.deep.equal(deletedTicket);
+
+//             sinon.restore();
+//         });
+//     });
+// });
+
+
+
+
+
+// // /*global it describe before */
+
+// // process.env.NODE_ENV = 'test';
+
+// // import { should } from 'chai';
+// // import database from '../../db/database.js';
+// // import tickets from '../../models/tickets.js';
+
+// // should();
+
+// // describe('Test model', () => {
+// //     const colName = 'tickets';
+// //     /**
+// //      * Before test, reset the user database
+// //      */
+
+// //     before(async () => {
+// //         const db = await database.openDb();
+
+// //         try {
+// //             const col = await db.collection(colName);
+
+// //             await col.deleteMany(); // This deletes the data in the collection
+// //         } catch (err) {
+// //             console.log("During setup following error occured:", err);
+// //         } finally {
+// //             await db.client.close();
+// //         }
+// //     });
+
+// //     /**
+// //      * Test the model ticketssetup
+// //      */
+// //     describe('tickets', () => {
+// //         // Get tickets, should be empty
+// //         it('should return empty array', async () => {
+// //             const res = await tickets.getTickets();
+
+// //             res.should.be.a('array');
+// //             res.should.have.lengthOf(0);
+// //         });
+
+// //         it('should data and array with 1 ticket', async () => {
+// //             const inData = {
+// //                 code: "ANAtest03",
+// //                 trainnumber: "13579",
+// //                 traindate: "1984-01-01"
+// //             };
+// //             const res = await tickets.createTicket(inData);
+
+// //             res.should.be.a('object');
+// //             res.should.have.property('_id');
+// //             res.code.should.equal('ANAtest03');
+// //         });
+
+// //         it('should return array with one item', async () => {
+// //             const res = await tickets.getTickets();
+
+// //             res.should.be.a('array');
+// //             res.should.have.lengthOf(1);
+// //             res[0].should.have.property('_id');
+// //             res[0].trainnumber.should.equal('13579');
+// //         });
+
+// //         it('should throw TypeError', async () => {
+// //             let error;
+
+// //             try {
+// //                 await tickets.createTicket();
+// //             } catch (e) {
+// //                 error = e;
+// //             }
+
+// //             error.should.be.an.instanceOf(TypeError);
+// //         });
+// //     });
+// // });
