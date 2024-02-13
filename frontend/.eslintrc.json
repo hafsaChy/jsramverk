@@ -1,0 +1,25 @@
+{
+  "parser": "babel-eslint",
+  "extends": ["eslint:recommended", "plugin:react/recommended"],
+  "plugins": ["react"],
+  "rules": {
+      // General ESLint Rules
+      "no-console": "warn", // Avoid using console.log, warn if used
+      "no-unused-vars": ["error", { "argsIgnorePattern": "^_" }], // Warn about unused variables
+  
+      // React-specific Rules
+      "react/jsx-uses-react": "error", // Ensure that React is in scope
+      "react/jsx-uses-vars": "error", // Ensure that variables used in JSX are declared
+  
+      // JSX Rules
+      "react/jsx-indent": ["error", 2], // Indent JSX with 2 spaces
+      "react/jsx-indent-props": ["error", 2], // Indent props with 2 spaces
+      "react/jsx-closing-bracket-location": ["error", "tag-aligned"], // Align closing brackets with the tag
+  
+      // Others (Adjust according to your preferences)
+      "react/prop-types": "off", // Disable prop-types validation
+      "react/display-name": "off" // Disable display name requirement for components
+  }
+}
+  
+  

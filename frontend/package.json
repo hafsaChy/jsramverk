@@ -29,7 +29,8 @@
     "eject": "react-scripts eject",
     "deploy": "npm run build && rsync -av --delete build/ haco22@ssh.student.bth.se:www/editor",
     "clean": "rm -rf node_modules package-lock.json",
-    "serve": "serve -s build"
+    "serve": "serve -s build",
+    "lint": "eslint ./src/pages/*.js"
   },
   "eslintConfig": {
     "extends": [
@@ -50,8 +51,12 @@
     ]
   },
   "devDependencies": {
+    "@babel/eslint-parser": "^7.23.10",
     "@babel/plugin-proposal-private-property-in-object": "^7.21.11",
+    "@babel/preset-env": "^7.23.9",
     "@testing-library/jest-dom": "^6.4.2",
+    "eslint": "^8.56.0",
+    "eslint-plugin-react": "^7.33.2",
     "jest-environment-jsdom": "^29.7.0",
     "jsdom": "^24.0.0"
   },
