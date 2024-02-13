@@ -1,29 +1,30 @@
 # jsramverk
 Repository for jsramverk course (DV1677), maintained by haco22 and glpa22.
 
-## Frontend
-
-### Starting app
+## Deployment of app
+The deployed backend in Azure can be found in [backend](https://jsramverk-backend-deploy-glpa22.azurewebsites.net) and the deployed application can be found in [frontend](https://www.student.bth.se/~haco22/editor/)
+## Tests
+#### Backend:
 ```
-# To run the app on http://localhost:9000/ from frontend/
-python3 -m http.server 9000
+# To run the test from backend/
+npm run test
 ```
-
-## Backend
-
-### Steps
+#### Frontend:
 ```
-# Check if node and npm are installed
-node -v
-npm -v
-# Install dependencies
-npm install 
+# To run the test from frontend/
+npm run test
 ```
 
-### Starting app
+## Starting the app
+To run the app locally follow the steps
 ```
-# To run the app from backend/
-node app.js
+#  stand in backend/ and run
+npm start
+```
+then
+```
+#  stand in frontend/ and run
+npm start
 ```
 
 ### Security audit
