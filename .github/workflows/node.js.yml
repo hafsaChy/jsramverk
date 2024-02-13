@@ -45,3 +45,8 @@ jobs:
       run: |
         cd backend
         npm run eslint -- routes/**/*.js
+
+    - name: Run tests in frontend directory
+      run: |
+        cd frontend
+        npm run test
