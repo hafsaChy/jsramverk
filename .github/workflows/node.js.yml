@@ -40,8 +40,14 @@ jobs:
         cd frontend
         npm run clean
         npm install --legacy-peer-deps
+        npm update --save-dev jest jest-environment-jsdom --force
 
     - name: Lint backend routes
       run: |
         cd backend
         npm run eslint -- routes/**/*.js
+
+    - name: Run tests in frontend directory
+      run: |
+        cd frontend
+        npm run test
