@@ -33,7 +33,7 @@ jobs:
     - name: Run tests in backend directory
       run: |
         cd backend
-        # npm test
+        npm run test
 
     - name: Install dependencies in frontend directory
       run: |
