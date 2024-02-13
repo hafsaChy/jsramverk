@@ -27,12 +27,13 @@ jobs:
     - name: Install dependencies in backend directory
       run: |
         cd backend
+        npm run clean
         npm install
 
     - name: Run tests in backend directory
       run: |
         cd backend
-        # npm test
+        npm run test
 
     - name: Install dependencies in frontend directory
       run: |
