@@ -26,7 +26,7 @@ export default function Home() {
    <>
     <div className="App">
       <header className="App-header">
-        <h1>Vällkommen till TågInfo Kontroll App</h1>
+        <h1>Välkommen till TågInfo Kontroll App</h1>
         <Button variant="contained" color="primary" onClick={logOut}>Logout</Button>
       </header>
       <div className="container">
